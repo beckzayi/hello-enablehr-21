@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="88px" height="88px" viewBox="0 0 88 88" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Group 20</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="32" cy="32" r="32"></circle>
+        <filter x="-32.8%" y="-23.4%" width="165.6%" height="165.6%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="6" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 0.819607843   0 0 0 0 0.831168158  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Why-EnableHR?" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop---Why-EnableHR?" transform="translate(-1060.000000, -1386.000000)">
+            <g id="Block" transform="translate(1040.000000, 1360.000000)">
+                <g id="Group-20" transform="translate(32.000000, 32.000000)">
+                    <g id="Oval">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#FFD1D4" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <path d="M34,20 C38.0923704,20 41.4670476,23.0728097 41.9426368,27.0370342 C44.3651635,28.4118375 46,31.0150005 46,34 C46,38.418278 42.418278,42 38,42 L26,42 C21.581722,42 18,38.418278 18,34 C18,29.581722 21.581722,26 26,26 L26.2518692,26.000644 C27.1397308,22.5498628 30.2720892,20 34,20 Z" id="Combined-Shape" stroke="#020A2C" stroke-width="3" opacity="0.6"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

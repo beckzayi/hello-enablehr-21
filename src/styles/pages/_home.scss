@@ -1,0 +1,82 @@
+.docs {
+    padding-top: 80px;
+}
+
+.main-title {
+    font-size: 2.25rem;
+    padding: 100px 160px 20px;
+    line-height: 3rem;
+    letter-spacing: -1px;
+    color: $black;
+    font-weight: 750;
+}
+
+.hp-title {
+    padding: 0 160px 100px;
+    line-height: 4rem;
+    margin: 0 auto;
+    font-size: 3.5rem;
+    letter-spacing: -1px;
+    color: $black;
+    font-weight: 750;
+}
+
+.main-subtitle {
+    color: $gray-500;
+    letter-spacing: 0;
+    line-height: 1.5rem;
+    font-size: 1.0625rem;
+    margin: 0 auto 32px;
+    width: 60%;
+}
+
+.hp_column_wrapper {
+    background: #f9fafe;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 0 20px;
+    height: 100%;
+    text-align: center;
+}
+
+.row .hp_column:first-child .hp_column_wrapper {
+    margin: 0 40px 0 0;
+}
+
+.row .hp_column:last-child .hp_column_wrapper {
+    margin: 0 0 0 40px;
+}
+
+.hp_column_icon {
+    width: 88px;
+    height: 88px;
+    padding: 20px;
+    color: $gray-400;
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.hp_column_icon--doc {
+    background-image: url('/images/icons/icon-balloon.svg');
+}
+
+.hp_column_icon--dev {
+    background-image: url('/images/icons/icon-cloud.svg');
+}
+
+.hp_column_icon--faq {
+    background-image: url('/images/icons/icon-phone.svg');
+}
+
+.hp_column_title {
+    margin-top: 1em;
+}
+
+.hp_column_title a {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    letter-spacing: -0.5px;
+    color: $black;
+    font-weight: 600;
+}

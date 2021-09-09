@@ -1,0 +1,21 @@
+---
+title: Retrieve Employee Tax Details
+slug: retrieve-tax-details
+---
+
+import YAMLData from '../../../content/enablehr.json';
+import Endpoint from '../../../components/endpoint.js';
+
+# Retrieve Tax Details
+
+<hr />
+
+This should contain something. Not sure what...
+
+<Endpoint
+    header={YAMLData}
+    child={'get'}
+    value={'/accounts/{accountId}/employees/{employeeId}/tax-details'}
+    endpointContext={YAMLData.paths['/accounts/{accountId}/employees/{employeeId}/tax-details']}
+    components={YAMLData.components}
+/>

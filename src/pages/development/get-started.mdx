@@ -1,0 +1,69 @@
+---
+title: Get Started
+path: /docs/get-started
+date: 2020-03-12
+---
+
+# Get started
+
+enableHR uses the OAuth 2.0 authorization code flow to issue API access tokens on behalf of users. Please get an understanding of OAuth 2.0 from https://oauth.net before proceeding if you are not familiar with the protocols.
+
+Before you can start using the enableHR API you need to get the client credentials for your application.
+
+## 1. Get client credentials for your application
+
+At this point you will have to contact enableHR via email or phone to get the client credentials for your application
+
+| property      | description                                                                                                                                     |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| redirect_uri  | this is the callback URL within your application that will be called after the user has authenticated and authorized access to your application |
+| client_id     | provided by enablehr once you provide use the redirect_uri                                                                                      |
+| client_secret | provided by enablehr once provide the redirect_uri                                                                                              |
+
+enableHR will provide you the client_id and client_secret via an email or SMS
+
+Keep the client secret safe as this is your password to access our API's
+
+## API
+
+enablehr uses the OpenAPI specifications and uses OpenAPI 3.0 to specify our API.
+
+## API Specifications
+
+enableHR API specifications can be found at https://rest.enablehr.com/enablehr.yaml OR https://rest.enablehr.com/enablehr.json.
+
+## Language Seleciion
+
+OpenAPI tools allow you to program in any language of your choice. OpenAPI offers tools to allow you to generate code from the OpenAPI specifications. Once you have selected your language the next step will show you how to generate the code in your selected language
+
+## Client code generation in your chosen language
+
+The following steps are using the online editor http://editor.swagger.io There are build tools available from OpenAPITools that can be incorporated into a build process.
+
+1. Open your browser
+2. Navigate to http://editor.swagger.io
+3. Copy paste the entire yaml file from https://rest.enablehr.com/enablehr.yaml into the left pane of http://editor.swagger.io
+4. From the menu bar Select Generate Client and select the language that your application will use. You will see a download start that will download a ZIP file containing the client code
+
+## Compiling client to create libraries for your chosen language
+
+Unzip the file in an appropriate directory and use the README.md file to identify the steps to build the code for accessing the endpoint.
+
+To use this code you will need to add additional code to extract the
+OAUTH 2.0 token and provide it to each call of the API.
+
+Use the instructions found in README.md to compile the libraries
+
+## Setting up to build you application
+
+Follow the normal process to build your application using your IDE or your build tools.
+
+## Authentication
+
+Please see [authentication](/authentication 'authentication') for further details.
+
+## Calling your first endpoint
+
+In Java.....
+
+In DOTNET...

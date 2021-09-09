@@ -1,0 +1,224 @@
+## Summary Resources
+
+When you fetch a list of resources, the response includes a subset of the attributes for that resource. This is the "summary" representation of the resource. (Some attributes are computationally expensive for the API to provide. For performance reasons, the summary representation excludes those attributes. To obtain those attributes, fetch the "detailed" representation.)
+
+## Detailed Resources
+
+### Detailed representations
+
+When you fetch an individual resource, the response typically includes all attributes for that resource. This is the "detailed" representation of the resource. (Note that authorization sometimes influences the amount of detail included in the representation.)
+
+### Authentication
+
+All requests to enableHR REST API endpoints require authentication. Requests that require authentication will return 404 Not Found, instead of 403 Forbidden, in some places. This is to prevent the accidental leakage of private information to unauthorized users.
+
+## Parameters
+
+Many API methods take optional parameters. For GET requests, any parameters not specified as a segment in the path can be passed as an HTTP query string parameter:
+
+## HTTP redirects
+
+API uses HTTP redirection where appropriate. Clients should assume that any request may result in a redirection. Receiving an HTTP redirection is not an error and clients should follow that redirect. Redirect responses will have a Location header field which contains the URI of the resource to which the client should repeat the requests.
+
+| Status Code                     | Description                                                                                                                                                                                  |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 301 Permanent redirection.      | The URI you used to make the request has been superseded by the one specified in the Location header field. This and all future requests to this resource should be directed to the new URI. |
+| 302, 307 Temporary redirection. | The request should be repeated verbatim to the URI specified in the Location header field but clients should continue to use the original URI for future requests.                           |
+|                                 | Other redirection status codes may be used in accordance with the HTTP 1.1 spec.                                                                                                             |
+
+## Timestamps
+
+All timestamps return in ISO 8601 format:
+
+YYYY-MM-DDTHH:MM:SSZ
+
+## Hypermedia
+
+All resources may have one or more \*\_url properties linking to other
+resources. These are meant to provide explicit URLs so that proper API
+clients don't need to construct URLs on their own. It is highly
+recommended that API clients use these. Doing so will make future
+upgrades of the API easier for developers. All URLs are expected to be
+proper RFC 6570 URI templates.
+
+## Pagination
+
+Requests that return multiple items will be paginated to 100 items by default.
+
+Listing endpoints use cursor-based pagination. A cursor is a string that
+points to a location in the result set. With cursor-based pagination,
+there is no fixed concept of "pages" in the result set, so you can't
+navigate to a specific page. Instead, you can traverse the results by
+using the before or after parameters.
+
+You can specify the number of items returned with the first or last
+parameters.
+
+## HTTP Status Codes
+
+enableHR REST APIs use the Status-Line part of an HTTP response message to inform clients of their request’s overarching result.
+
+RFC 2616 defines the Status-Line syntax as shown below:
+
+`Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF`
+
+HTTP defines these standard status codes that can be used to convey the results of a client’s request. The status codes are divided into the five categories.
+
+| Category | Description                                                                      |
+| -------- | -------------------------------------------------------------------------------- |
+| 2xx:     | Success – Indicates that the client’s request was accepted successfully.         |
+| 4xx:     | Client Error – This category of error status codes points the finger at clients. |
+| 5xx:     | Server Error – The server takes responsibility for these error status codes.     |
+
+## 2xx Status Codes
+
+| STATUS CODE    | DESCRIPTION                                                                                                                            |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| 200 OK         | Indicates that request has succeeded.                                                                                                  |
+| 201 Created    | Indicates that request has succeeded and a new resource has been created as a result.                                                  |
+| 202 Accepted   | Indicates that the request has been received but not completed yet. It is typically used in log running requests and batch processing. |
+| 204 No Content | The server successfully processed the request, and is not returning any content.                                                       |
+
+### REST Specific Status Codes
+
+### 200 (OK)
+
+It indicates that the REST API successfully carried out whatever action the client requested and that no more specific code in the 2xx series is appropriate.
+
+Unlike the 204 status code, a 200 response should include a response body. The information returned with the response is dependent on the method used in the request, for example:
+
+| Method | Description                                                                                                         |
+| ------ | ------------------------------------------------------------------------------------------------------------------- |
+| GET    | an entity corresponding to the requested resource is sent in the response;                                          |
+| HEAD   | the entity-header fields corresponding to the requested resource are sent in the response without any message-body; |
+| POST   | an entity describing or containing the result of the action;                                                        |
+| TRACE  | an entity containing the request message as received by the end server.                                             |
+
+### 201 (Created)
+
+A REST API responds with the 201 status code whenever a resource is created inside a collection. There may also be times when a new resource is created as a result of some controller action, in which case 201 would also be an appropriate response.
+
+The newly created resource can be referenced by the URI(s) returned in the entity of the response, with the most specific URI for the resource given by a Location header field.
+
+The origin server MUST create the resource before returning the 201 status code. If the action cannot be carried out immediately, the server SHOULD respond with a 202 (Accepted) response instead.
+
+### 202 (Accepted)
+
+A 202 response is typically used for actions that take a long while to process. It indicates that the request has been accepted for processing, but the processing has not been completed. The request might or might not be eventually acted upon, or even maybe disallowed when processing occurs.
+
+Its purpose is to allow a server to accept a request for some other process (perhaps a batch-oriented process that is only run once per day) without requiring that the user agent’s connection to the server persist until the process is completed.
+
+The entity returned with this response SHOULD include an indication of the request’s current status and either a pointer to a status monitor (job queue location) or some estimate of when the user can expect the request to be fulfilled.
+
+### 204 (No Content)
+
+The 204 status code is usually sent out in response to a PUT, POST, or DELETE request when the REST API declines to send back any status message or representation in the response message’s body.
+
+An API may also send 204 in conjunction with a GET request to indicate that the requested resource exists, but has no state representation to include in the body.
+
+If the client is a user agent, it SHOULD NOT change its document view from that which caused the request to be sent. This response is primarily intended to allow input for actions to take place without causing a change to the user agent’s active document view. However, any new or updated metainformation SHOULD be applied to the document currently in the user agent’s dynamic view.
+
+The 204 response MUST NOT include a message-body and thus is always terminated by the first empty line after the header fields.
+
+## 4xx Status Code
+
+| STATUS CODE      | DESCRIPTION                                                                                                                                       |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400 Bad Request  | The request could not be understood by the server due to incorrect syntax. The client SHOULD NOT repeat the request without modifications.        |
+| 401 Unauthorized | Indicates that the request requires user authentication information. The client MAY repeat the request with a suitable Authorization header field |
+| 403 Forbidden    | Unauthorized request. The client does not have access rights to the content. Unlike 401, the client’s identity is known to the server.            |
+| 404 Not Found    | The server can not find the requested resource.                                                                                                   |
+
+### 400 (Bad Request)
+
+400 is the generic client-side error status, used when no other 4xx error code is appropriate. Errors can be like malformed request syntax, invalid request message parameters, or deceptive request routing etc.
+
+The client SHOULD NOT repeat the request without modifications.
+
+### 401 (Unauthorized)
+
+A 401 error response indicates that the client tried to operate on a protected resource without providing the proper authorization. It may have provided the wrong credentials or none at all. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource.
+
+The client MAY repeat the request with a suitable Authorization header field. If the request already included Authorization credentials, then the 401 response indicates that authorization has been refused for those credentials. If the 401 response contains the same challenge as the prior response, and the user agent has already attempted authentication at least once, then the user SHOULD be presented the entity that was given in the response, since that entity might include relevant diagnostic information.
+
+### 403 (Forbidden)
+
+A 403 error response indicates that the client’s request is formed correctly, but the REST API refuses to honor it, i.e., the user does not have the necessary permissions for the resource. A 403 response is not a case of insufficient client credentials; that would be 401 (“Unauthorized”).
+
+Authentication will not help, and the request SHOULD NOT be repeated. Unlike a 401 Unauthorized response, authenticating will make no difference.
+
+### 404 (Not Found)
+
+The 404 error status code indicates that the REST API can’t map the client’s URI to a resource but may be available in the future. Subsequent requests by the client are permissible.
+
+No indication is given of whether the condition is temporary or permanent. The 410 (Gone) status code SHOULD be used if the server knows, through some internally configurable mechanism, that an old resource is permanently unavailable and has no forwarding address. This status code is commonly used when the server does not wish to reveal exactly why the request has been refused, or when no other response is applicable.
+
+## 5xx Status Code
+
+| STATUS CODE               | DESCRIPTION                                                                                    |
+| ------------------------- | ---------------------------------------------------------------------------------------------- |
+| 500 Internal Server Error | The server encountered an unexpected condition which prevented it from fulfilling the request. |
+| 501 Not Implemented       | The HTTP method is not supported by the server and cannot be handled.                          |
+| 503 Service Unavailable   | The server is not ready to handle the request.                                                 |
+
+### 500 (Internal Server Error)
+
+500 is the generic REST API error response. Most web frameworks automatically respond with this response status code whenever they execute some request handler code that raises an exception.
+
+A 500 error is never the client’s fault, and therefore, it is reasonable for the client to retry the same request that triggered this response and hope to get a different response.
+
+The API response is the generic error message, given when an unexpected condition was encountered and no more specific message is suitable.
+
+### 503 Service Unavailable
+
+The server cannot handle the request (because it is overloaded or down for maintenance). Generally, this is a temporary state.
+
+# HTTP Methods
+
+REST APIs enable you to develop any kind of web application having all possible CRUD (create, retrieve, update, delete) operations.
+
+REST guidelines suggest using a specific HTTP method on a particular type of call made to the server (though technically it is possible to violate this guideline, yet it is highly discouraged).
+
+Use below-given information to find a suitable HTTP method for the action performed by API.
+
+## HTTP GET
+
+Use GET requests to retrieve resource representation/information only – and not to modify it in any way. As GET requests do not change the state of the resource, these are said to be safe methods. Additionally, GET APIs should be _idempotent_, which means that making multiple identical requests must produce the same result every time until another API (POST or PUT) has changed the state of the resource on the server.
+
+If the Request-URI refers to a data-producing process, it is the produced data which shall be returned as the entity in the response and not the source text of the process, unless that text happens to be the output of the process.
+
+For any given HTTP GET API, if the resource is found on the server, then it must return HTTP response code 200 (OK) – along with the response body, which is JSON content (due to their platform-independent nature).
+
+In case resource is NOT found on server then it must return HTTP response code 404 (NOT FOUND).
+
+Similarly, if it is determined that GET request itself is not correctly formed then server will return HTTP response code 400 (BAD REQUEST).
+
+## HTTP POST
+
+Use POST APIs to create new subordinate resources, e.g., a file is subordinate to a directory containing it or a row is subordinate to a database table. When talking strictly in terms of REST, POST methods are used to create a new resource into the collection of resources.
+
+Ideally, if a resource has been created on the origin server, the response SHOULD be HTTP response code 201 (Created) and contain an entity which describes the status of the request and refers to the new resource, and a Location header.
+
+Many times, the action performed by the POST method might not result in a resource that can be identified by a URI. In this case, either HTTP response code 200 (OK) or 204 (No Content) is the appropriate response status.
+
+Responses to this method are not cacheable, unless the response includes appropriate Cache-Control or Expires header fields.
+
+Please note that POST is neither `safe` nor _idempotent_, and invoking two identical POST requests will result in two different resources containing the same information (except resource ids).
+
+## HTTP PUT
+
+Use PUT APIs primarily to update existing resource (if the resource does not exist, then API may decide to create a new resource or not). If a new resource has been created by the PUT API, the origin server MUST inform the user agent via the HTTP response code 201 (Created) response and if an existing resource is modified, either the 200 (OK) or 204 (No Content) response codes SHOULD be sent to indicate successful completion of the request.
+
+If the request passes through a cache and the Request-URI identifies one or more currently cached entities, those entries SHOULD be treated as stale. Responses to this method are not cacheable.
+
+The difference between the POST and PUT APIs can be observed in request URIs. POST requests are made on resource collections, whereas PUT requests are made on a single resource.
+
+## HTTP DELETE
+
+As the name applies, DELETE APIs are used to delete resources (identified by the Request-URI).
+
+A successful response of DELETE requests SHOULD be HTTP response code 200 (OK) if the response includes an entity describing the status, 202 (Accepted) if the action has been queued, or 204 (No Content) if the action has been performed but the response does not include an entity.
+
+DELETE operations are _idempotent_. If you DELETE a resource, it’s removed from the collection of resources. Repeatedly calling DELETE API on that resource will not change the outcome – however, calling DELETE on a resource a second time will return a 404 (NOT FOUND) since it was already removed. Some may argue that it makes the DELETE method _non-idempotent_. It’s a matter of discussion and personal opinion.
+
+If the request passes through a cache and the Request-URI identifies one or more currently cached entities, those entries SHOULD be treated as stale. Responses to this method are not cacheable.

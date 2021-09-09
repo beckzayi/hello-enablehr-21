@@ -1,0 +1,61 @@
+{
+  "name": "gatsby-starter-hello-world",
+  "private": true,
+  "description": "enableHR API documentation site via Gatsby",
+  "version": "0.1.0",
+  "license": "BSD",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "npm run develop -p 9070",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "eslint": "eslint --config=./.eslintrc.js --format=stylish --color --fix .",
+    "prettify": "prettier --write src/"
+  },
+  "dependencies": {
+    "@loadable/component": "^5.12.0",
+    "@mdx-js/mdx": "^1.5.7",
+    "@mdx-js/react": "^1.5.7",
+    "bootstrap": "^5.0.0-beta3",
+    "codemirror": "^5.53.2",
+    "gatsby": "^2.26.1",
+    "gatsby-plugin-mdx": "^1.0.79",
+    "gatsby-plugin-react-helmet": "^3.1.23",
+    "gatsby-plugin-sass": "^2.2.1",
+    "gatsby-source-filesystem": "^2.1.52",
+    "graphiql": "^0.17.5",
+    "js-yaml": "^3.14.0",
+    "node-sass": "^4.14.0",
+    "openapi-snippet": "^0.9.2",
+    "prism-react-renderer": "^1.2.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1",
+    "react-markdown": "^5.0.3",
+    "swagger-ui": "^3.25.0",
+    "swagger-ui-react": "^3.25.0"
+  },
+  "devDependencies": {
+    "@popperjs/core": "^2.9.2",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-prettier": "3.1.0",
+    "husky": "4.3.0",
+    "jquery": "^3.6.0",
+    "lint-staged": "10.4.0",
+    "popper": "^1.0.1",
+    "prettier": "2.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts}": [
+      "npm run prettify",
+      "npm run eslint"
+    ]
+  }
+}

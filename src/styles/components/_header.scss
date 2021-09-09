@@ -1,0 +1,24 @@
+header .navbar-nav .nav-link {
+    font-family: 'Futura PT', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: $gray-100;
+    position: relative;
+    &.current-page:after,
+    &:hover:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background-color: $gray-100;
+        width: 100%;
+    }
+}
+
+.navbar-expand .navbar-nav .nav-link {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 1.5rem;
+}

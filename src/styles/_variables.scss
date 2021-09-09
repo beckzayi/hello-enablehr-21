@@ -1,0 +1,34 @@
+/* Colors */
+$principal-green: #48a383;
+$dark-green: #12af7f;
+$black: #020a2c;
+$red: #e6555f;
+$white: #fff;
+$purple-light: #5864fe;
+$gray-100: #f1f2f4;
+$gray-110: #f9fafe;
+$gray-200: #e7e8eb;
+$gray-310: #b9bccb;
+$gray-300: #a2a6b1;
+$gray-400: #5a6073;
+$gray-500: #585d72;
+$gray-800: $black;
+
+$font-family-base: 'Inter', sans-serif;
+$body-color: $gray-500;
+
+/* Forms - in this case we don't use bootstrap variables */
+$form-field-height: 3.5rem;
+$form-font-size: 0.9375rem;
+$form-line-height: 1.5rem;
+
+$navbar-nav-link-padding-x: 0;
+$navbar-nav-link-padding-y: 0;
+
+$table-border-width: 0;
+$code-color: inherit;
+
+$nav-tabs-link-active-color: $principal-green;
+$nav-tabs-border-color: $gray-200;
+$nav-tabs-link-active-border-color: $gray-200 $gray-200 transparent;
+$nav-tabs-link-hover-border-color: transparent;

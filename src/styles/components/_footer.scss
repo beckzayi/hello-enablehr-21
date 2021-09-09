@@ -1,0 +1,11 @@
+footer {
+    padding: 40px 0 20px 0;
+    font-size: 0.9375rem;
+    color: $gray-500;
+    .footer-social {
+        text-align: right;
+        a:not(:last-child) {
+            margin-right: 12px;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+---
+title: Retrieve Employee Bank Details
+slug: retrieve-bank-details
+---
+
+import YAMLData from '../../../content/enablehr.json';
+import Endpoint from '../../../components/endpoint.js';
+
+# Retrieve Bank Details
+
+<hr />
+
+This should contain something. Not sure what...
+
+<Endpoint
+    header={YAMLData}
+    child={'get'}
+    value={'/accounts/{accountId}/employees/{employeeId}/bank-accounts'}
+    endpointContext={YAMLData.paths['/accounts/{accountId}/employees/{employeeId}/bank-accounts']}
+    components={YAMLData.components}
+/>

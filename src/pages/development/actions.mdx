@@ -1,0 +1,49 @@
+# Actions
+
+An action endpoint in enableHR OpenAPI is used to submit long running changes to enableHR. A long running change is typically an activity that will change a number of tables and takes more time that a typical CRUD operation.
+
+An action endpoint will return a Location Header with an action status URL. Clients are expected to call this action status URL iteratively till the returned action status is either Failed or Completed.
+
+All action endpoints contain the word actions.
+
+A successful call will return HTTP 202 with an action status URL
+
+{
+"actionStatusURL": "http://api.enablehr.com/accounts/{acctId}/action-status/{actionStatusId}"
+}
+
+## List of actions endpoints
+
+All these endpoint return an action status URL.
+
+### /accounts/{accountId}/candidates/{candidateId}/actions/convert
+
+This action is used to convert a candidate into an employee
+
+### /accounts/{accountId}/candidates/{candidateId}/actions/merge
+
+This action is to merge two candidates
+
+### /accounts/{accountId}/employees/{employeeId}/actions/terminate
+
+This action is user to terminate an employee
+
+### /accounts/{accountId}/employees/{employeeId}/actions/transfer
+
+This action is used to transfer an employee between branches
+
+## /accounts/{accountId}/action-status/{actionStatusId}
+
+This call allows the client to determine the status of a previous action. The accountStatusId is the id that was returned when the long running action was called. It is returned in the Location: header on a successful submit of an action
+
+## Action Status Fields
+
+| Name           | Type   | Description                                                                                                                                                                                                  |
+| -------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| id             | string | The identifier for the ActionStatusDetail                                                                                                                                                                    |
+| actionStatus   | string | Enum: Pending, In_Progress, Completed, Failed                                                                                                                                                                |
+| referenceId    | string | The id of the item this action is being performed on e.g. the employee id or the candidate id                                                                                                                |
+| referenceType  | string | Enum: Employee, Candidate, User. Given the type of the reference id                                                                                                                                          |
+| type           | string | Enum: Terminate_Employee, Transfer_Employee_Move_Everything, Transfer_Employee_Copy, Transfer_Employee_Move_Everything_No_Trace, Convert_Candidate_To_Employee, Merge_Candidate -type of the original action |
+| dateCreatedUTC | string | UTC time of when this action was created (format is YYYY-MM-DD HH:MM:SS)                                                                                                                                     |
+| dateUpdatedUTC | string | UTC time of when this action was updated. (format is YYYY-MM-DD HH:MM:SS)                                                                                                                                    |

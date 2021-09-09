@@ -1,0 +1,21 @@
+---
+title: Users Self
+slug: users-self
+---
+
+import YAMLData from '../../../content/enablehr.json';
+import Endpoint from '../../../components/endpoint.js';
+
+# Users Self
+
+<hr />
+
+This should contain something. Not sure what...
+
+<Endpoint
+    header={YAMLData}
+    child={'get'}
+    value={'/users/self'}
+    endpointContext={YAMLData.paths['/users/self']}
+    components={YAMLData.components}
+/>

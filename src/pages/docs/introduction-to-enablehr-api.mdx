@@ -1,0 +1,102 @@
+# Introduction to enableHR API
+
+Websites are designed to cater to people's strengths. Humans have an incredible ability to take visual information, combine it with our experiences to derive meaning, and then act on that meaning. It's why you can look at a form on a website and know that the little box with the phrase "First Name" above it means you are supposed to type in the word you use to informally identify yourself.
+
+Yet, what happens when you face a very time-intensive task, like copying the contact info for a thousand customers from one site to another? You would love to delegate this work to a computer so it can be done quickly and accurately. Unfortunately, the characteristics that make websites optimal for humans make them difficult for computers to use.
+
+The solution is an API. An API is the tool that makes a website's data digestible for a computer. Through it, a computer can view and edit data, just like a person can by loading pages and submitting forms.
+
+Making data easier to work with is good because it means people can write software to automate tedious and labor-intensive tasks. What might take a human hours to accomplish can take a computer seconds through an API.
+
+## How An API Is Used
+
+When two systems (websites, desktops, smartphones) link up through an API, we say they are "integrated." In an integration, you have two sides, each with a special name. One side we have already talked about: the server. This is the side that actually provides the API. It helps to remember that the API is simply another program running on the server 3. It may be part of the same program that handles web traffic, or it can be a completely separate one. In either case, it is sitting, waiting for others to ask it for data.
+
+The other side is the "client." This is a separate program that knows what data is available through the API and can manipulate it, typically at the request of a user. A great example is a smartphone app that syncs with a website. When you push the refresh button in your app, it talks to a server via an API and fetches the newest info.
+
+The same principle applies to websites that are integrated. When one site pulls in data from the other, the site providing the data is acting as the server, and the site fetching the data is the client.
+
+## The enableHR API Ecosystem
+
+Building an OpenAPI is a huge undertaking, so we’re releasing it in stages. Each release improves and expands the number of things you and your business can do with enableHR.
+
+There are still several months of work ahead for the team to further
+extend the functionality in our API, but we’re excited about what
+we’ve achieved so far – and what you can build on today. We have
+deployed several releases of the API, and we are aiming at starting to
+develop API Connectors in the 2nd half of the year 2021. We haven’t
+finalised yet the systems we will be building connectors to, nor the
+order of priority, and this is will be communicated by the end of
+April 2021.
+
+The table below shows the information that is currently exposed through the API and the short-term roadmap.
+
+### Currently available:
+
+-   [Accounts: List Branches](https://developer.test.enablehr.com/development/ListBranches/get 'Accounts: List Branches')
+-   Accounts: Retrieve details of a Branch
+-   Accounts: List Reference Data: Genders
+-   Accounts: List Reference Data: Honorifics
+-   Accounts: List Reference Data: Employment Types
+-   Accounts: List Reference Data: Employment Status
+
+-   Employees: Create a new employee
+-   Employees: Update an existing employee
+-   Employees: List all employees in the account
+-   Employees: Retrieve details of an employee
+-   Employees: Update an existing employee - Adding Employment Status
+-   Employees: Terminate an employee
+-   Employees: Transfer an employee (Move Everything)
+
+-   Payroll (AU): Retrieve Tax Details to an employee record
+-   Payroll (AU): Maintain Tax Details to an employee record
+-   Payroll (AU): Retrieve details of all Bank Accounts of an employee
+-   Payroll (AU): Maintain Bank Accounts of an employee
+-   Payroll (AU): Retrieve leave balances of an employee
+-   Payroll (AU): Maintain leave balances of an employee
+-   Payroll (AU): List all Superannuation Memberships of an employee
+-   Payroll (AU): Retrieve Superannuation Memberships of an employee
+-   Payroll (AU): Update a Superannuation Memberships of an employee (Regulated Funds)
+-   Payroll (AU): Remove a Superannuation Memberships from an employee
+-   Payroll (AU): Create Superannuation Memberships for an employee (Regulated Funds)
+
+-   Payroll (NZ): Retrieve Kiwi Saver details of an employee
+-   Payroll (NZ): Update Kiwi Saver details of an employee
+-   Payroll (NZ): Retrieve Tax Details of an employee
+-   Payroll (NZ): Update Tax Details of an employee
+-   Payroll (NZ): Retrieve details of all Bank Accounts of an employee
+-   Payroll (NZ): Update details of all Bank Accounts of an employee
+-   Payroll (NZ): Retrieve leave balances of an employee
+-   Payroll (NZ): Update leave balances of an employee
+
+-   Candidates: List candidate
+-   Candidates: Add new candidate
+-   Candidates: Retrieve & update permanent field
+-   Candidates: Convert candidate to employee
+-   Candidates: Merge 2 candidate
+
+#### Coming soon:
+
+-   Employees: List/Retrieve/Update Custom Fields of an employee
+-   Employees: List/Retrieve/Add/Update/Delete roles and groups
+-   Employees: List/Retrieve/Add/Update/Delete competencies
+-   Employees: Manage roles and competencies for an employee
+-   Employees: Create a new employee - Adding Emergency Contact
+-   Employees: Update an existing employee - Adding Emergency Contact
+-   Employees: Retrieve details of an employee - Adding Emergency Contact
+-   Employees: List & retrieve notes for an employee
+-   Employees: Add & update note to an employee
+
+-   Employees: Check for duplicate employee records
+-   Employees: Merge 2 employees
+-   Employees: Multi-branch linking of an employee
+-   Employees: List & retrieve notes for a candidate
+-   Employees: Add a note to a candidate
+-   Employees: Transfer to new branch (new copy)
+-   Employees: Transfer to new branch (move no trace)
+-   Employees: Delete an employee
+-   Candidates: Retrieve & update custom fields
+-   Candidates: Multi-branch linking of a candidate
+-   Candidates: Delete a candidate
+-   Users: List and manage ESS users
+-   Users: List and manage enableHR users

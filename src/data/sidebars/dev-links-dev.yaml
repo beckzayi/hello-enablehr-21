@@ -1,0 +1,104 @@
+- title: Development
+  key: dev
+  breadcrumbTitle: Development
+  items:
+      - title: Get Started
+        items:
+            - title: Open API
+              link: /development/openapi-description
+            - title: Journey
+              link: /development/get-started
+      - title: Authentication
+        items:
+            - title: Getting and Using Tokens
+              link: /development/authentication
+      - title: Scopes and permissions
+        items:
+            - title: Scopes
+              link: /development/scopes
+            - title: Permissions
+              link: /development/permissions
+            - title: Actions
+              link: /development/actions
+            - title: Sorting, Filtering and Pagnination
+              link: /development/pagination
+      - title: Troubleshooting
+        items:
+            - title: Troubleshooting
+              link: /development/troubleshooting
+      - title: Guides
+        items:
+            - title: Guides
+              link: /development/faq/guides
+            - title: Code Examples
+              link: /development/faq/code-examples
+      - title: API Endpoints
+        items:
+            - title: Status
+              items:
+                  - title: Ping
+                    link: /development/Ping/get
+                  - title: Users Self
+                    link: /development/RetrieveCurrentUser/get
+                  - title: Accounts Self
+                    link: /development/RetrieveCurrentAccount/get
+            - title: Action Status
+              items:
+                  - title: Status of an action
+                    link: /development/ActionStatuses/get
+            - title: Employee
+              items:
+                  - title: List Employees
+                    link: /development/ListEmployees/get
+                  - title: Create Employee
+                    link: /development/CreateEmployee/post
+                  - title: Retrieve Employee
+                    link: /development/RetrieveEmployee/get
+                  - title: Update Employee
+                    link: /development/UpdateEmployee/put
+            - title: Employee bank accounts
+              items:
+                  - title: Retrieve Bank Details
+                    link: /development/RetrieveEmployeeBankAccounts/get
+                  - title: Maintain Bank Details
+                    link: /development/MaintainEmployeeBankAccounts/put
+            - title: Employee tax details
+              items:
+                  - title: Retrieve Tax Details
+                    link: /development/RetrieveEmployeeTaxDetails/get
+                  - title: Maintain Tax Details
+                    link: /development/MaintainEmployeeTaxDetails/put
+            - title: Employee leave balances
+              items:
+                  - title: Retrieve Leave Balances
+                    link: /development/RetrieveEmployeeLeaveBalances/get
+                  - title: Maintain Leave Balances
+                    link: /development/MaintainEmployeeLeaveBalances/put
+            - title: Employee retirement savings
+              items:
+                  - title: Retrieve retirement savings
+                    link: /development/RetrieveEmployeeRetirementSavings/get
+                  - title: Maintain retirement savings
+                    link: /development/MaintainEmployeeRetirementSaving/put
+            - title: Employee actions
+              items:
+                  - title: Transfer Employee
+                    link: /development/TransferEmployee/post
+                  - title: Terminate Employee
+                    link: /development/TerminateEmployee/post
+            - title: Reference Data
+              items:
+                  - title: List Employment Status
+                    link: /development/ListEmploymentStatuses/get
+                  - title: List Employment Types
+                    link: /development/ListEmploymentTypes/get
+                  - title: List Genders
+                    link: /development/ListGenders/get
+                  - title: List Honorifics
+                    link: /development/ListHonorifics/get
+            - title: Account Branches
+              items:
+                  - title: List Account Branches
+                    link: /development/ListBranches/get
+                  - title: Retrieve Branch
+                    link: /development/RetrieveBranch/get

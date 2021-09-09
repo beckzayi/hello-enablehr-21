@@ -1,0 +1,109 @@
+# Filtering, Pagination and Sorting
+
+enableHR OpenAPI supports filtering, pagination and sorting on all the listing endpoints.
+
+The default number of items retrieved by list endpoints is 100 (pagesize = 100)
+
+All listing endpoints have a header which lists provides further information to the client.
+
+The following fields are in the header
+
+| Field Name      | Description                                                                                                                                                                                                |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| hasPreviousPage | A boolean value set to true if there are items in a previous page.                                                                                                                                         |
+| hasNextPage     | A boolean value set to true if there are items in a following page                                                                                                                                         |
+| endCursor       | An opaque identifier used to paginate. This is the tag to the last element in the list. Provide this to the list endpoints (using before or after parameter) to get elements before or after this element  |
+| startCursor     | An opaque identifier used to paginate. This is the tag to the first element in the list. Provide this to the list endpoints (using before or after parameter) to get elements before or after this element |
+
+If the nextPage value is true then you have more that 100 records and must make additional calls to retrieve them
+
+### Filtering
+
+| Parameter | Description                                                                                             |
+| --------- | ------------------------------------------------------------------------------------------------------- |
+| filter    | String that describes the filter that needs to be applied before the results are returned to the client |
+
+The filter parameter is passed as a query string to the API endpoints.
+
+The value of this parameter is a search string that contains field:values together with boolean operators, which can be used to filter the result.
+
+An asterix (\*) can also be used as a wildcard for partial matches on words. Logical operators (AND and OR) can be used between terms. Terms can be grouped via parenthesis to build complex search queries (see examples below).
+
+An asterix cannot be used by itself as a value. It must be part of a wildcard string
+
+The fields used in the field part of field:values must be one of the fields returned from the REST API endpoint.
+
+**Some example filters:**
+
+_firstName:John_ which would return employees whose firstName was John.
+
+_surname:Smith OR surname:Klein_ which would return employees whose surname was either Smith or Klein.
+
+\*surname:Smi\*\* which would return employees whose surname is Smith, Smits, Smithe, etc.
+
+_type:LegalEntity AND postcode:2000_ which would return all branches that are Legal Entities and in postcode 2000.
+
+_postcode:2000 OR postcode:3000_ which would return all branches in either postcode of 2000 or in postcode 3000.
+
+_type:LegalEntity AND (postcode:2000 OR postcode:3000)_ which would return all branches that are Legal Entities and in postcode 2000 or 3000.
+
+An example would be
+
+filter=firstName:John
+
+### Sorting
+
+With enableHR OpenAPI, it is possible to return lists of elements that are sorted (ordered) according to specific criteria
+
+| Parameter | Description                                   |
+| --------- | --------------------------------------------- |
+| sort      | A string with fieldname:asc or fieldname:desc |
+
+The parameter is a query parameter that hsould specify the field, followed by asc/desc, separated by : (colon)
+
+An example would be sort=firstName:desc
+
+### Pagination
+
+Pagination is available on all listing endpoints.
+
+enableHR OpenAPI pagination is Cursor-based
+
+Every element in the list is associated with a unique ID (the cursor). Clients paginating through the list then provide the cursor of the starting element as well as a count of items to be retrieved or the cursor of the last element as well as a count of items to be retrieved.
+
+The following parameters can be used for paginating the results.
+
+| Parameter | Description                                                                                                                                                                                          |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| first     | Indicates the number of items that would be in the results. NB: Pagination would be invalidated if the filter/sort parms change on a subsequent call.                                                |
+| after     | Return results after the cursor. NB: Pagination would be invalidated if the filter/sort parms change on a subsequent call. This is an opaque string and has no meaning to the client                 |
+| last      | Indicates the number of items that would be in the results NB: Pagination would be invalidated if the filter/sort parms change on a subsequent call.                                                 |
+| before    | End Cursor for the requested Page. Return results before this cursor. Does not include the cursor element. NB: Pagination would be invalidated if the filter/sort parms change on a subsequent call. |
+
+Use of before and after will return unreliable results and only one of those should be used at any time
+
+## Examples
+
+### Get first 100 employees after a cursor
+
+https://rest.enablehr.com/accounts/{accountId}/employees?after=aXRlbSMxMjM0&first=100
+
+### Get the last 100 employees before a cursor
+
+https://rest.enablehr.com/accounts/{accountId}/employees?before=qaSDaXRlbSMxMjM0&last=100
+
+### Sort the list of employees by firstName desc
+
+https://rest.enablehr.com/accounts/{accountId}/employees?sort=firstName:desc
+
+### Sort the list of employees by firstName desc and lastName asc
+
+https://rest.enablehr.com/accounts/{accountId}/employees?sort=firstName:desc,lastName:asc
+
+### Filter the list of employees by firstName starting with J (can return John, James, Jerry etc)
+
+https://rest.enablehr.com/accounts/{accountId}/employees?firstName=J*
+
+### Filter the list of employees by firstName starting with S and ending with t (can return Scott, Smith etc)
+
+https://rest.enablehr.com/accounts/{accountId}/employees?firstName=S*t

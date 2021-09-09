@@ -1,0 +1,134 @@
+---
+title: Authentication
+path: /docs/authentication
+date: 2020-03-12
+---
+
+# Getting and using tokens
+
+## Authentication
+
+enableHR uses the OAuth 2.0 authorization code flow to issue API access tokens on behalf of users.
+
+At a high-level, this flow has the following steps:
+
+-   Your application directs the browser to the enableHR authorization page.
+-   The user authenticates and approves your application's request.
+-   The user is redirected back to your application with an authorization code in the query string.
+-   Your application sends this code to enableHR to exchange for an API access token and optionally a refresh token.
+-   Your application can now use these tokens to call the enableHR API on behalf of the user.
+
+### 1.Redirect to the enableHR authorization URL.
+
+Your application should redirect the user to the authorization URL
+
+https://login.enablehr.com/oauth/authorize
+
+The following query parameters should be passed with the GET request:
+
+| parameter     | description                                         |
+| ------------- | --------------------------------------------------- |
+| response_type | code (required)                                     |
+| client_id     | issued when you created your application (required) |
+| scope         | permissions to request, see Scopes (required)       |
+| redirect_uri  | URL to redirect back to (required)                  |
+| state         | unique string to be passed back (optional)          |
+
+The scope parameter is a space-separated list of OAuth scopes indicating the desired access. See Scopes for the complete list of scopes.
+
+The redirect_uri parameter must match one of the URLs specified when the client_id was issued.
+
+The state parameter can be provided to carry through server-specific state. For example, you can use this to help prevent forgery attacks.
+
+The user will be presented with a login screen, and then a confirmation screen where they will grant your application access to their EnableHR data.
+
+### 2. Receive an authorization code from enableHR.
+
+After a successful login, the authorization server will redirect to the URL specified in step 1 passing the following parameters passed with the GET request:
+
+| parameter | description                           |
+| --------- | ------------------------------------- |
+| code      | a temporary authorization code        |
+| state     | the unique string specified in step 1 |
+
+If you passed a state parameter in step 1 then at this point you should compare the state parameter from this request with the state parameter from the request in step 1. If the states don't match then the request may have been created by an unknown third party and you should abort the process.
+
+If your request for access is denied by the user then the user will be redirected to the URL specified in step 1 with the following query parameters passed with the GET request:
+
+| parameter | value         |
+| --------- | ------------- |
+| error     | access_denied |
+
+### 3. Exchange the authorization code for an access token.
+
+The authorization code received in step 2 will remain valid for 5 minutes and should be exchanged for an access token. To do this, submit a POST request to the token URL:
+
+https://login.enablehr.com/oauth/token
+
+The following parameters should be included in the POST request:
+
+| parameter     | description                                         |
+| ------------- | --------------------------------------------------- |
+| client_id     | issued when you created your application (required) |
+| client_secret | issued when you created your application (required) |
+| grant_type    | authorization_code (required)                       |
+| redirect_uri  | the URL specified in step 1 (required)              |
+
+The client_id and client_secret need to be provided as an Authorization header with the request
+
+e.g
+
+Authorization: Basic dGVzdGluZ19jbGllbnRfaWQ6dGVzdGluZ19jbGllbnRfc2VjcmV0
+
+The value dGVzdGluZ19jbGllbnRfaWQ6dGVzdGluZ19jbGllbnRfc2VjcmV0 is the client_id:client_secret base64 encoded
+
+This request will return a JSON response containing the access token, for example
+
+{
+"access_token":"test_access_token_in_jwt_format",
+"token_type":"bearer",
+"refresh_token":"test_refresh_token"
+"expires_in":"1799",
+"scope":"manage:employees read:accounts:referencedata",
+"accountIds":[],
+"userId":"ea71599908794e6b9eaf7ff84dbcd8cf",
+"jti":"ovLgx1bV/aRWVGNylJ4zgQn+p6Q="
+}
+
+| parameter     | description                                                                          |
+| ------------- | ------------------------------------------------------------------------------------ |
+| access_token  | token to be used as the Bearer token in the Authorization header of all API requests |
+| expires_in    | expiration time of the access token in seconds since the response was generated      |
+| refresh_token | token to be used to request new access tokens                                        |
+| scope         | permissions to request, see Scopes (required)                                        |
+| accountIds    | account ids associated with this user)                                               |
+| userid        | user id of the logged in user                                                        |
+| jti           | The "jti" (JWT ID) claim provides a unique identifier for the JWT.                   |
+
+### 4. Exchange a refresh token for an access token.
+
+The access token has a limited lifetime (currently 30 minutes). If your application requested the offline_access scope (in step 1) then it is possible to gain extended access to the user's data by requesting a new access token using the refresh token. To do this, submit a POST request to the token URL:
+
+https://login.enablehr.com/oauth/token
+
+The following parameters should be included in the POST request:
+
+| parameter     | description                                         |
+| ------------- | --------------------------------------------------- |
+| client_id     | issued when you created your application (required) |
+| client_secret | issued when you created your application (required) |
+| grant_type    | refresh_token (required)                            |
+| refresh_token | the refresh token returned in step 3                |
+
+This request will return a JSON response containing a new access token and request token.
+
+{
+"access_token":"test_access_token_in_jwt_format",
+"token_type":"bearer",
+"refresh_token":"test_refresh_token"
+"expires_in":"1799",
+"scope":"manage:employees read:accounts:referencedata",
+"accountIds":[],
+"userId":"ea71599908794e6b9eaf7ff84dbcd8cf",
+"jti":"ovLgx1bV/aRWVGNylJ4zgQn+p6Q="
+}

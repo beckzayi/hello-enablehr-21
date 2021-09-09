@@ -1,0 +1,15 @@
+.icon-search::after {
+    content: '';
+    background: url('/images/icons/search.svg') center / cover no-repeat;
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.icon-chevron-right::after {
+    content: '';
+    background: url('/images/icons/chevron-right.svg') center / contain no-repeat;
+    width: 16px;
+    height: 16px;
+    display: block;
+}

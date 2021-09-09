@@ -1,0 +1,137 @@
+:root {
+    font-size: 16px;
+}
+
+body {
+    color: $black;
+    font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $gray-500;
+    font-family: 'Inter', sans-serif;
+}
+
+code {
+    font-family: 'Source Code Pro', sans-serif;
+    display: inline;
+    padding: 3px 6px;
+    margin: 0 2px;
+    font-size: 80%;
+    background-color: rgb(245, 247, 249);
+    color: $code-color;
+    border: 1px solid $gray-100;
+    border-radius: 3px;
+}
+
+a {
+    color: $principal-green;
+}
+
+a:hover {
+    color: $dark-green;
+    text-decoration: none;
+}
+a.text-dark:hover {
+    color: $gray-500 !important;
+}
+
+.request-wrap h2 {
+    font-weight: 300;
+    font-size: 1.25rem;
+}
+
+.page-width-standard {
+    max-width: 1000px;
+    width: 99.9%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 60px 30px;
+}
+
+.page-title {
+    color: $principal-green;
+    margin-bottom: 2.8rem;
+}
+
+.section {
+    margin-top: 3.5em;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    margin-bottom: 1em;
+}
+
+/******** Table ********/
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td {
+    border-top: 1px solid $table-border-color !important;
+}
+
+table th {
+    color: $gray-400;
+}
+
+table p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+td,
+th {
+    padding: 5px 8px;
+    text-align: left;
+}
+
+td:first-child {
+    padding-left: 15px;
+}
+
+.cell--number,
+.cell--integer {
+    color: #a52a2a;
+}
+
+.cell--string {
+    color: #008080;
+}
+
+.cell--boolean {
+    color: #ff69b4;
+}
+
+.cell--object {
+    color: #00f;
+}
+
+.cell--array {
+    color: #008000;
+}
+
+.cell--required {
+    font-weight: bold;
+}
+
+/******** END Table ********/
+
+.block-content {
+    margin-bottom: 1.5rem;
+}
+
+.nav-item:hover {
+    cursor: pointer;
+}

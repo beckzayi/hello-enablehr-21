@@ -1,0 +1,16 @@
+# HTTP Status Codes
+
+enableHR REST APIs use the Status-Line part of an HTTP response message to inform clients of their request’s overarching result.
+
+RFC 2616 defines the Status-Line syntax as shown below:
+
+`Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF`
+
+HTTP defines these standard status codes that can be used to convey the results of a client’s request. The status codes are divided into the five categories.
+
+| Category | Description                                                                      |
+| -------- | -------------------------------------------------------------------------------- |
+| 1xx:     | Informational – Communicates transfer protocol-level information.                |
+| 2xx:     | Success – Indicates that the client’s request was accepted successfully.         |
+| 4xx:     | Client Error – This category of error status codes points the finger at clients. |
+| 5xx:     | Server Error – The server takes responsibility for these error status codes.     |

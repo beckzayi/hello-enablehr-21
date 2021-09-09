@@ -1,0 +1,27 @@
+# What is an API Connector
+
+A connector is a thing that connects you from the point of your reference to a destination system. For example, a XERO connector within the context of enableHR means a connection between the enableHR API and XERO.
+
+A XERO connector within the context of Atlassian, means a way to connect JIRA to XERO.
+
+In the integration space, you typically will not find something like a pre-packaged “XERO to JIRA” integration because that application would need to run either in XERO or in JIRA.
+
+However, you may find a “XERO to JIRA” connector both in the XERO AppExchange as well as the Atlassian Marketplace.
+
+When an integration platform is used to avoid point to point integrations, you usually will have something like a XERO to our enableHR connector, then some processing logic and then aa enableHR to JIRA connector. This way you don’t tightly couple those systems as you can much more easily modify the integration application that lives outside both systems in play.
+
+Connectors in the integration space are usually categorized either by the system that they connect to or the protocol that they support. So you will see names like a HTTP connector, a JDBC connector, a .NET connector, a XERO connector, or SAP connector.
+
+An API is the infrastructure that creates the potential for applications to share data.
+
+To actually integrate two applications together, an API Connector has to be built between them.
+
+To understand this better, let’s use the airport analogy.
+
+Imagine that you live in Sydney and want to go to Auckland. In order to do this, each city needs to have an airport. That’s the API. Both having an airport is however not enough for you to travel between them. You still need a route between them. That’s the API connector.
+
+If you want to go from Sydney to Auckland, you need to wait for a route to be available. Alternatively, and if you have the adequate resources, you could build your own route: fly with your own private jet!
+
+Indeed, once an application like enableHR has published an API, developers can use it to integrate the application with another piece of software simply by building an API Connector – a relatively straightforward job once an API is available.
+
+Now, if you are in Auckland and want to go to Melbourne but there is no direct route, you might be able to get there via Sydney. This network of airports (APIs) and routes (API Connectors) is called an API Ecosystem.

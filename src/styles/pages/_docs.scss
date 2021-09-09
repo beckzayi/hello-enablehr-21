@@ -1,0 +1,56 @@
+/* Docs Index */
+.docs-bg {
+    width: 100%;
+    height: 218px;
+    padding: 80px 30px;
+    background: center / cover no-repeat url('/images/developer-banner.gif');
+}
+
+.docs-bg__searchbar {
+    max-width: 670px;
+    margin: 0 auto;
+    position: relative;
+
+    .icon-search {
+        position: absolute;
+        top: 16px;
+        left: 10px;
+    }
+
+    input {
+        padding-left: 40px;
+    }
+}
+
+.docs-quickstart-block {
+    border: 1px solid $gray-200;
+    padding: 40px 30px;
+
+    .card-container {
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 15px;
+    }
+
+    .icon {
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 4px;
+    }
+}
+
+.dev-section-block {
+    padding: 80px 30px;
+}
+
+.docs-explore-block {
+    .card-title {
+        border: 1px solid transparent;
+        @include border-radius(0.2rem);
+        &:hover {
+            border-color: $gray-200;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+    }
+}

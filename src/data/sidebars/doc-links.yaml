@@ -1,0 +1,26 @@
+- title: Documentation
+  key: docs
+  breadcrumbTitle: Documentation
+  items:
+      - title: Introduction to API
+        items:
+            - title: What is an API
+              link: /docs/what-is-api
+            - title: What is an API Connector
+              link: /docs/what-is-a-connector
+            - title: Introduction to enableHR API
+              link: /docs/introduction-to-enablehr-api
+      - title: API Resources
+        items:
+            - title: REST Resources
+              link: /docs/rest-resource
+            - title: Account Resources
+              link: /docs/api-resources-accounts
+            - title: Employees
+              items:
+                  - title: Payroll
+                    link: /docs/api-resources-employees-payroll
+                  - title: Training and Qualifications
+                    link: /docs/api-resources-employees-training-qualifications
+            - title: Candidates
+              link: /docs/api-resources-candidates

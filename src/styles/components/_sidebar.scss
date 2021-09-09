@@ -1,0 +1,108 @@
+.bd-navbar {
+    min-height: 4rem;
+    padding: 0 2em;
+    background: $principal-green;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.08);
+}
+
+.bd-navbar .navbar-brand {
+    margin-right: 4em;
+}
+
+header.bd-navbar .nav-link {
+    color: $white;
+}
+
+.bd-content {
+    order: 1;
+    padding: 40px 80px;
+}
+
+.bd-toc-link {
+    cursor: pointer;
+    display: flex;
+    padding: 0.25rem 1.5rem;
+}
+
+li.bd-toc-link {
+    font-size: 0.9375rem;
+    padding-left: 2rem;
+    padding-right: 0.25rem;
+}
+
+.bd-toc-link.active {
+    font-weight: 600;
+    color: $dark-green;
+}
+
+.bd-toc-link > a {
+    color: $gray-500;
+}
+.bd-toc-link.active > a {
+    color: $dark-green;
+}
+
+.bd-toc-link .icon {
+    padding: 0.4em 0.5em 0.5em 0;
+}
+
+.bd-toc-link .icon:after {
+    transition: transform 0.2s ease-in-out;
+}
+.bd-toc-link.active .icon:after {
+    transform: rotate(90deg);
+}
+.bd-toc-link .icon:after {
+    color: $gray-500;
+    height: 0.6rem;
+}
+
+.bd-toc-link ~ .bd-sidenav .bd-sidenav-active {
+    color: $dark-green;
+}
+
+.bd-links {
+    padding: 1rem 0;
+    margin: 0 -15px;
+}
+
+.bd-sidenav {
+    display: block;
+    padding-top: 0.5rem;
+}
+
+.bd-sidenav .bd-sidenav {
+    padding-left: 1.2rem;
+}
+
+.bd-sidebar {
+    padding-top: 40px;
+}
+
+.bd-sidebar .nav li {
+    display: block;
+}
+
+.bd-sidebar a {
+    text-decoration: none;
+}
+
+.bd-sidebar .nav > li > a.bd-sidenav-active,
+.bd-sidebar .nav > li > a:hover {
+    color: $principal-green;
+}
+
+.bd-toc-item {
+    margin-bottom: 0.875rem;
+}
+
+.arrow-nav {
+    float: right;
+    width: 24px;
+    cursor: pointer;
+    color: $gray-300;
+    text-align: center;
+    &:hover {
+        background-color: $gray-200;
+    }
+}

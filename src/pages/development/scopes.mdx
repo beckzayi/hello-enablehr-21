@@ -1,0 +1,55 @@
+---
+title: Scopes
+path: /docs/scopes
+date: 2020-03-12
+---
+
+## Scopes
+
+### About scopes and permissions for enablehr
+
+To use or manage any resource in enablehr, you must use a token with
+the appropriate scope, and your user account must have appropriate
+permissions for that resource
+
+For example:
+
+To list employees in your account , your token must
+have the read:employees scope, and your user account must have read
+permissions for the account
+
+### These are the scopes currently available to the client.
+
+| Scope                       | Description | Permissions |
+| --------------------------- | ----------- | ----------- |
+| manage:employees            |             |             |
+| manage:employees:payroll    |             |             |
+| read:accounts:referencedata |             |             |
+| read:employees              |             |             |
+| read:employees:payroll      |             |             |
+
+###
+
+Note: Your OAuth App can request the scopes in the initial
+redirection. You can specify multiple scopes by separating them with a
+space using %20:
+
+https://login.enablehr.com/oauth/authorize?client_id=...&scope=manage:employees%20manage:employees:payroll
+
+### Requested scopes and granted scopes
+
+The scope attribute lists scopes attached to the token that were
+granted by the user. Normally, these scopes will be identical to what
+you requested. However, users can edit their scopes, effectively
+granting your application less access than you originally
+requested. You should be aware of this possibility and adjust
+your application's behavior accordingly.
+
+It's important to handle error cases where a user chooses to grant you
+less access than you originally requested. For example, applications
+can warn or otherwise communicate with their users that they will see
+reduced functionality or be unable to perform some actions.
+
+Also, applications can always send users back through the flow again
+to get additional permission, but don’t forget that users can always
+say no.
