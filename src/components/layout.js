@@ -8,7 +8,7 @@ import '../styles/app.scss';
 const Layout = (props) => {
     let displaySidebar = isDisplaySidebar(props);
     return (
-        <div>
+        <>
             <SEO {...props} />
             <Header />
 
@@ -40,7 +40,7 @@ const Layout = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
