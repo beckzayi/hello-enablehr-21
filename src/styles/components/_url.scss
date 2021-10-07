@@ -1,0 +1,29 @@
+.endpoint-method-url {
+    font-size: 1.125rem;
+}
+
+[class^='method-type-'] {
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.method-type-get {
+    color: $dark-blue;
+}
+
+.method-type-post {
+    color: $purple-light;
+}
+
+.method-type-put {
+    color: $principal-blue;
+}
+
+.method-type-delete {
+    color: $red;
+}
+
+.endpoint-method-url__path {
+    color: $gray-400;
+}

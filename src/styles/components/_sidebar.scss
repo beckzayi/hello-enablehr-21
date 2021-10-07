@@ -25,7 +25,6 @@ header.bd-navbar .nav-link {
 }
 
 li.bd-toc-link {
-    font-size: 0.9375rem;
     padding-left: 2rem;
     padding-right: 0.25rem;
 }
@@ -68,11 +67,12 @@ li.bd-toc-link {
 
 .bd-sidenav {
     display: block;
-    padding-top: 0.5rem;
 }
 
-.bd-sidenav .bd-sidenav {
+.bd-toc-item .bd-sidenav {
     padding-left: 1.2rem;
+    padding-top: 0.125rem;
+    font-size: 0.875rem;
 }
 
 .bd-sidebar {
@@ -94,6 +94,12 @@ li.bd-toc-link {
 
 .bd-toc-item {
     margin-bottom: 0.875rem;
+}
+
+.bd-toc-item {
+    .bd-toc-item {
+        margin-bottom: 0.25rem;
+    }
 }
 
 .arrow-nav {

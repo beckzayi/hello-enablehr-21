@@ -13,9 +13,11 @@ class Sidebar extends React.Component {
                 <div className="col-md-3 col-xl-2 bd-sidebar">
                     <section aria-label="Secondary Navigation" id="SecondaryNavigation" className="doc-sidebar">
                         <ul className="nav bd-sidenav">
-                            {items.map((item) => (
-                                <Accordion {...item} key={item.title} />
-                            ))}
+                            {items.map((item) => {
+                                const subLinks = getAllLinks(item).flat();
+                                const isOpen = subLinks.includes(path);
+                                return <Accordion {...item} key={item.title} isOpen={isOpen} />;
+                            })}
                         </ul>
                     </section>
                 </div>
@@ -27,3 +29,16 @@ class Sidebar extends React.Component {
 }
 
 export default Sidebar;
+
+function getAllLinks(item) {
+    const { items } = item;
+    if (!items) {
+        return null;
+    }
+    return items.map((i) => {
+        if (i.items) {
+            return getAllLinks(i);
+        }
+        return i.link;
+    });
+}

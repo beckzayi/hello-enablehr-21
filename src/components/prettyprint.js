@@ -11,6 +11,8 @@ const PrettyPrint = (props) => {
         plain: {
             color: '#e6ecf1',
             backgroundColor: '#183055',
+            fontSize: '13px',
+            fontFamily: 'Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
         },
         styles: [
             {

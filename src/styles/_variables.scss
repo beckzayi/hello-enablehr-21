@@ -1,5 +1,6 @@
 /* Colors */
 $principal-green: #48a383;
+$principal-blue: #27caf9;
 $dark-green: #12af7f;
 $black: #020a2c;
 $red: #e6555f;
@@ -13,6 +14,7 @@ $gray-300: #a2a6b1;
 $gray-400: #5a6073;
 $gray-500: #585d72;
 $gray-800: $black;
+$dark-blue: #347fc4;
 
 $font-family-base: 'Inter', sans-serif;
 $body-color: $gray-500;
@@ -26,7 +28,7 @@ $navbar-nav-link-padding-x: 0;
 $navbar-nav-link-padding-y: 0;
 
 $table-border-width: 0;
-$code-color: inherit;
+$code-color: $red;
 
 $nav-tabs-link-active-color: $principal-green;
 $nav-tabs-border-color: $gray-200;

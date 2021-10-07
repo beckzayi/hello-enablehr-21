@@ -10,6 +10,14 @@ class Accordion extends React.Component {
         };
     }
 
+    componentDidMount() {
+        if (this.props.isOpen) {
+            this.setState({
+                isExpand: this.props.isOpen,
+            });
+        }
+    }
+
     toggleAccordion = () => {
         this.setState({
             isExpand: !this.state.isExpand,

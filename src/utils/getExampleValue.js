@@ -6,11 +6,10 @@ import data from '../content/enablehr.json';
  * @return {string|Object\Array}
  */
 export default (response) => {
-    if (response.$ref === undefined) {
-        return;
+    if (response.$ref !== undefined) {
+        response = getRequestBody(response.$ref);
     }
-    let schema = getRequestBody(response.$ref);
-    const objectSchema = getParentSchema(schema);
+    const objectSchema = getParentSchema(response);
     const exampleValue = getExampleResponseValue(objectSchema);
     return exampleValue;
 };
@@ -99,7 +98,7 @@ function getExampleResponseValue(schema) {
     $ref = schema?.items?.$ref || schema?.$ref;
     if ($ref) {
         nextSchema = getSchemaObjectByRef($ref);
-        return [getExampleResponseValue(nextSchema)];
+        return getExampleResponseValue(nextSchema);
     }
 
     // 2. If "properties" exist
@@ -121,7 +120,12 @@ function getExampleResponseValue(schema) {
                 temp[currentKey] = getExampleResponseValue(nextSchema);
             }
 
-            if (properties[currentKey].type === 'array' && properties[currentKey]?.items?.$ref) {
+            if (properties[currentKey]?.type === 'object') {
+                nextSchema = properties[currentKey];
+                temp[currentKey] = getExampleResponseValue(nextSchema);
+            }
+
+            if (properties[currentKey]?.type === 'array' && properties[currentKey]?.items?.$ref) {
                 $ref = properties[currentKey].items.$ref;
                 nextSchema = getSchemaObjectByRef($ref);
                 temp[currentKey] = [getExampleResponseValue(nextSchema)];

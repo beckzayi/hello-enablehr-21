@@ -15,6 +15,11 @@ h5,
 h6 {
     color: $gray-500;
     font-family: 'Inter', sans-serif;
+    letter-spacing: -0.015rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
 }
 
 code {
@@ -55,78 +60,12 @@ a.text-dark:hover {
 }
 
 .page-title {
-    color: $principal-green;
-    margin-bottom: 2.8rem;
+    margin-bottom: 2rem;
 }
 
 .section {
-    margin-top: 3.5em;
+    margin-top: 3rem;
 }
-
-.section-title {
-    font-size: 1.75rem;
-    margin-bottom: 1em;
-}
-
-/******** Table ********/
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-table td {
-    border-top: 1px solid $table-border-color !important;
-}
-
-table th {
-    color: $gray-400;
-}
-
-table p {
-    margin-top: 0;
-    margin-bottom: 1rem;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-td,
-th {
-    padding: 5px 8px;
-    text-align: left;
-}
-
-td:first-child {
-    padding-left: 15px;
-}
-
-.cell--number,
-.cell--integer {
-    color: #a52a2a;
-}
-
-.cell--string {
-    color: #008080;
-}
-
-.cell--boolean {
-    color: #ff69b4;
-}
-
-.cell--object {
-    color: #00f;
-}
-
-.cell--array {
-    color: #008000;
-}
-
-.cell--required {
-    font-weight: bold;
-}
-
-/******** END Table ********/
 
 .block-content {
     margin-bottom: 1.5rem;

@@ -1,0 +1,65 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    color: $black;
+}
+
+table td {
+    border-top: 1px solid $table-border-color !important;
+}
+
+table th {
+    color: $gray-400;
+}
+
+table p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+td {
+    word-break: break-word;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+td,
+th {
+    padding: 5px 8px;
+    text-align: left;
+}
+
+td:first-child {
+    padding-left: 15px;
+}
+
+.cell--number,
+.cell--integer {
+    color: #a52a2a;
+}
+
+.cell--string {
+    color: $principal-green;
+}
+
+.cell--boolean {
+    color: #ff69b4;
+}
+
+.cell--object {
+    color: $purple-light;
+}
+
+.cell--array {
+    color: $dark-green;
+}
+
+.cell--required {
+    font-weight: bold;
+}
+
+.table-parameters {
+    font-size: 0.8125rem;
+}

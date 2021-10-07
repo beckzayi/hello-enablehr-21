@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
-export default () => (
+const Home = () => (
     <div className="docs">
         <div className="row">
             <h1 className="hp-title text-center">Welcome to enableHR API documentation portal</h1>
@@ -9,7 +9,7 @@ export default () => (
                 <div className="hp_column_wrapper">
                     <div className="hp_column_icon hp_column_icon--doc"></div>
                     <div className="hp_column_title">
-                        <Link to="/docs">What is enableHR API?</Link>
+                        <Link to="/docs/">What is enableHR API?</Link>
                     </div>
                 </div>
             </div>
@@ -17,7 +17,7 @@ export default () => (
                 <div className="hp_column_wrapper">
                     <div className="hp_column_icon  hp_column_icon--dev"></div>
                     <div className="hp_column_title">
-                        <Link to="/development">How to start using enableHR API?</Link>
+                        <Link to="/development/">How to start using enableHR API?</Link>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@ export default () => (
                 <div className="hp_column_wrapper">
                     <div className="hp_column_icon  hp_column_icon--faq"></div>
                     <div className="hp_column_title">
-                        <Link to="/faqs">Frequently Asked Questions</Link>
+                        <Link to="/faqs/">Frequently Asked Questions</Link>
                     </div>
                 </div>
             </div>
@@ -40,3 +40,5 @@ export default () => (
         </p>
     </div>
 );
+
+export default Home;

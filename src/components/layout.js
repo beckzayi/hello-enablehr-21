@@ -1,5 +1,5 @@
 import React from 'react';
-import SEO from './main/seo';
+import SEO from './seo';
 import Header from './header';
 import Sidebar from './sidebar/sidebar';
 import Footer from './footer';

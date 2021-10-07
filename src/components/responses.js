@@ -1,68 +1,39 @@
-import React from 'react';
-import PrettyPrint from '../components/prettyprint.js';
+import React, { useState } from 'react';
+import Response from './response';
 
-function displayReference(responseContext, components) {
-    if (responseContext.content && responseContext.content['application/json'].schema['$ref']) {
-        const reference = responseContext.content['application/json'].schema['$ref'];
+export default ({ responses, url, method }) => {
+    const arrayStatusCode = Object.keys(responses);
+    const [status, setStatus] = useState(arrayStatusCode[0]);
 
-        // take the string apart
-
-        const words = reference.split('/');
-        const lastword = words[words.length - 1];
-        return (
-            <div>
-                <PrettyPrint jsonObj={components.schemas[lastword]} />
-            </div>
-        );
-    }
-    // expected output: "fox"
-}
-
-function displayDescription(responseContext) {
-    if (responseContext.content && responseContext.content['application/json'].schema.description) {
-        return (
-            <div>
-                Description: {responseContext.content && responseContext.content['application/json'].schema.description}{' '}
-            </div>
-        );
-    }
-}
-
-function displayExample(responseContext) {
-    if (responseContext.content && responseContext.content['application/json'].schema.example) {
-        return (
-            <div>Example: {responseContext.content && responseContext.content['application/json'].schema.example} </div>
-        );
-    }
-}
-
-function displayType(responseContext) {
-    if (responseContext.content && responseContext.content['application/json'].schema.type) {
-        return <div>Type: {responseContext.content && responseContext.content['application/json'].schema.type} </div>;
-    }
-}
-
-const Response = (props) => {
-    const responseContext = props.responseContext;
-    const responseCode = props.responseCode;
-    const components = props.components;
+    const handleClick = (e) => {
+        setStatus(e.target.textContent);
+    };
 
     return (
-        <div>
-            <h5>HTTP Return Code: {responseCode} </h5>
-            <hr />
-            {displayDescription(responseContext)}
-            {displayExample(responseContext)}
-            {displayType(responseContext)}
-            {displayReference(responseContext, components)}
-
-            <h5>Description</h5>
-
-            <div>{responseContext.description} </div>
-
-            <hr />
+        <div className="section">
+            <h2 className="section-title">Responses</h2>
+            {arrayStatusCode.length > 0 && (
+                <>
+                    <ul className="nav nav-tabs" style={{ padding: 0 }}>
+                        {arrayStatusCode.map((key) => (
+                            <li className="nav-item" key={key}>
+                                <span onClick={handleClick} className={`nav-link ${key === status ? 'active' : ''}`}>
+                                    {key}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                    <ul style={{ padding: 0 }}>
+                        {arrayStatusCode.map((key) => {
+                            return (
+                                <li key={key} style={{ display: key === status ? 'block' : 'none' }}>
+                                    <Response key={key} response={responses[key]} url={url} method={method} />
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </>
+            )}
         </div>
     );
 };
-
-export default Response;

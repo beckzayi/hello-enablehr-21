@@ -26,7 +26,7 @@ const AccordionItem = (props) => {
     );
 };
 
-export default () => {
+const Faqs = () => {
     const content = [
         {
             title: `How should I handle callback failure?`,
@@ -141,3 +141,5 @@ export default () => {
         </div>
     );
 };
+
+export default Faqs;

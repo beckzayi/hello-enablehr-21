@@ -17,10 +17,10 @@ const Header = () => (
         <div className="navbar-nav-scroll">
             <ul className="navbar-nav">
                 <NavLink to="/" text="Home" />
-                <NavLink to="/docs" text="Documentation" />
-                <NavLink to="/development" text="Development" />
-                <NavLink to="/faqs" text="FAQ's" />
-                <NavLink to="/contact-us" text="Contact Us" />
+                <NavLink to="/docs/" text="Documentation" />
+                <NavLink to="/development/" text="Development" />
+                <NavLink to="/faqs/" text="FAQ's" />
+                <NavLink to="/contact-us/" text="Contact Us" />
             </ul>
         </div>
     </header>

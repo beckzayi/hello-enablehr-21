@@ -2,7 +2,8 @@ import React from 'react';
 import WithSidebarLayout from '../components/withSidebarLayout';
 
 const browser = typeof window !== 'undefined' && window;
-export default () => {
+
+const NotFound = () => {
     return (
         browser && (
             <WithSidebarLayout>
@@ -14,3 +15,5 @@ export default () => {
         )
     );
 };
+
+export default NotFound;
