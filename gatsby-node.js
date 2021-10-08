@@ -34,7 +34,15 @@ exports.createPages = ({ actions: { createPage } }) => {
 exports.onCreateWebpackConfig = ({ actions, stage, plugins }) => {
     if (stage === 'build-javascript' || stage === 'develop') {
         actions.setWebpackConfig({
-            plugins: [plugins.provide({ process: 'process/browser' })],
+            plugins: [plugins.provide({ process: 'process/browser', Buffer: ['buffer', 'Buffer'] })],
         });
     }
+    actions.setWebpackConfig({
+        resolve: {
+            fallback: {
+                http: require.resolve('stream-http'),
+                https: require.resolve('https-browserify'),
+            },
+        },
+    });
 };
