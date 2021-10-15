@@ -1,25 +1,25 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Title from '../components/title';
-
 import CustomContent from '../components/customContent';
-import Url from '../components/url';
+import Endpoint from '../components/endpoint';
 import Description from '../components/description';
+import PathParameters from '../components/pathParameters';
+import QueryParameters from '../components/queryParameters';
 import Responses from '../components/responses';
-import Parameters from '../components/parameters';
-import ParametersPath from '../components/parametersPath';
 import RequestBody from '../components/requestBody';
 import CodeSnippet from '../components/codeSnippet';
 import { getSidebarItems } from '../utils/sidebar/item-list';
 
-const PageTemplate = ({ pageContext: { page }, data }) => {
-    const { description, method, url, responses, parameters, path_parameters, requestBody } = page;
+const PageTemplate = ({ pageContext: { page, parameters, method, endpoint, slug }, data }) => {
+    const { description, responses, parameters: query_parameters, requestBody } = page;
 
     // The `data` object is made available by graphql query
     const {
         allMdx: { edges, totalCount },
     } = data;
-    const slug = page.slug;
+
+    // Find the `title` from the yaml file of sidebar items
     let title;
     const findPageItem = (docItems) => {
         docItems.forEach((item) => {
@@ -33,21 +33,24 @@ const PageTemplate = ({ pageContext: { page }, data }) => {
         });
     };
     findPageItem(getSidebarItems('development').items);
+
     return (
         <div>
             <section>
                 <Title content={title} />
-                <Url method={method} url={url} />
-                {totalCount > 0 && <CustomContent body={edges[0].node.body} />}
+                <Endpoint endpoint={endpoint} method={method} />
                 <Description content={description} />
+                {totalCount > 0 && <CustomContent body={edges[0].node.body} />}
                 <div className="section">
-                    {path_parameters?.length || parameters?.length || requestBody?.length ? <h2>Request</h2> : null}
-                    {path_parameters && path_parameters.length > 0 && <ParametersPath parameters={path_parameters} />}
-                    {parameters && parameters.length > 0 && <Parameters parameters={parameters} />}
+                    {parameters?.length || query_parameters?.length || requestBody?.length ? <h2>Request</h2> : null}
+                    {parameters && parameters.length > 0 && <PathParameters parameters={parameters} />}
+                    {query_parameters && query_parameters.length > 0 && (
+                        <QueryParameters parameters={query_parameters} />
+                    )}
                     {requestBody && <RequestBody requestBody={requestBody} />}
                 </div>
-                <Responses responses={responses} url={url} method={method} />
-                <CodeSnippet url={url} method={method} />
+                <Responses responses={responses} />
+                <CodeSnippet url={endpoint} method={method} />
             </section>
         </div>
     );

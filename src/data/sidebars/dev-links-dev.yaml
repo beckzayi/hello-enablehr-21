@@ -42,6 +42,8 @@
                     link: /development/RetrieveCurrentUser/get/
                   - title: Accounts Self
                     link: /development/RetrieveCurrentAccount/get/
+                  - title: Retrieve Current User
+                    link: /development/RetrieveCurrentUserGivenId/get/
             - title: Action Status
               items:
                   - title: Status of an action
@@ -102,3 +104,13 @@
                     link: /development/ListBranches/get/
                   - title: Retrieve Branch
                     link: /development/RetrieveBranch/get/
+            - title: Candidates
+              items:
+                  - title: List Candidates
+                    link: /development/ListCandidates/get/
+                  - title: Create Candidate
+                    link: /development/CreateCandidate/post/
+            - title: Hubs
+              items:
+                  - title: List Hubs
+                    link: /development/ListHubs/get/

@@ -9,13 +9,17 @@ module.exports = {
         Atomics: 'readonly',
         SharedArrayBuffer: 'readonly',
     },
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
     parserOptions: {
         ecmaFeatures: {
             jsx: true,
         },
         ecmaVersion: 11,
         sourceType: 'module',
+        requireConfigFile: false,
+        babelOptions: {
+            presets: ['@babel/preset-react'],
+        },
     },
     plugins: ['prettier'],
     rules: {

@@ -1,33 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import getExampleValue, { getSchemaProperties } from '../utils/getExampleValue';
 import PrettyPrint from './prettyprint';
+import { getRefComponent, getExampleValue, loadSchema, listAllPropertiesOfSchema } from '../utils/parser';
+
+const spec = require(process.env.GATSBY_API_SPEC_URL);
 
 const initialItemsToShow = 10;
 
 export default ({ requestBody }) => {
-    const { description } = requestBody,
-        res = getExampleValue(requestBody),
-        schema = getSchemaProperties(requestBody);
+    const { description } = requestBody;
 
-    console.log('%crequestBody ', 'color:yellow', requestBody);
-    console.log('%c     schema ', 'color:gold', schema);
-    const { properties, type, required } = schema;
+    const [sample, setSample] = useState(null);
 
-    const mappedProperties = propMapping(properties),
-        totalProperties = countTotalProperties(mappedProperties);
+    const [type, setType] = useState(null);
+    const [required, setRequired] = useState([]);
+    const [allProperties, setAllProperties] = useState([]);
 
-    const [displaySchema, setDisplaySchema] = useState(true);
-
+    const [displaySchemaTab, setDisplaySchemaTab] = useState(true);
+    const [totalProperties, setTotalProperties] = useState(0);
     const [isExpand, setIsExpanded] = useState(true);
 
-    useEffect(() => {
-        if (totalProperties > initialItemsToShow) {
+    useEffect(async () => {
+        const schema = await loadSchema(requestBody, spec);
+        if (schema) {
+            const exampleValue = getExampleValue(schema, spec);
+            setSample(exampleValue);
+        }
+
+        const comp = await getRefComponent(schema.$ref, spec);
+        setType(comp.type);
+        setRequired(comp.required);
+
+        const allProperties = await listAllPropertiesOfSchema(comp.properties, spec);
+        setAllProperties(allProperties);
+
+        const totalProps = countTotalProperties(allProperties);
+        setTotalProperties(totalProps);
+
+        if (totalProps > initialItemsToShow) {
             setIsExpanded(false);
         }
     }, []);
 
-    function handleClick(v) {
-        setDisplaySchema(v);
+    function handleClickTab(value) {
+        setDisplaySchemaTab(value);
     }
 
     function toggleSchema() {
@@ -78,14 +93,16 @@ export default ({ requestBody }) => {
                 }}>
                 <ul className="nav nav-tabs">
                     <li className="nav-item" aria-hidden="true">
-                        <span onClick={() => handleClick(true)} className={`nav-link ${displaySchema ? 'active' : ''}`}>
+                        <span
+                            onClick={() => handleClickTab(true)}
+                            className={`nav-link ${displaySchemaTab ? 'active' : ''}`}>
                             Schema
                         </span>
                     </li>
                     <li className="nav-item" aria-hidden="true">
                         <span
-                            onClick={() => handleClick(false)}
-                            className={`nav-link ${displaySchema ? '' : 'active'}`}>
+                            onClick={() => handleClickTab(false)}
+                            className={`nav-link ${displaySchemaTab ? '' : 'active'}`}>
                             Example
                         </span>
                     </li>
@@ -94,7 +111,7 @@ export default ({ requestBody }) => {
                 <div
                     style={{
                         padding: '2rem 0',
-                        display: displaySchema ? 'block' : 'none',
+                        display: displaySchemaTab ? 'block' : 'none',
                         fontSize: '0.8125rem',
                     }}>
                     <div>
@@ -104,48 +121,29 @@ export default ({ requestBody }) => {
                     </div>
 
                     {/* TODO make this a table [Property, Type, Required] ordered by required first */}
-                    {displayProperties(mappedProperties)}
+                    {displayProperties(allProperties)}
+
                     {totalProperties > initialItemsToShow && (
                         <div className={isExpand ? `toggleExtra is-on` : `toggleExtra`} onClick={toggleSchema}>
                             {isExpand ? 'collapse' : '...show more'}
                         </div>
                     )}
                 </div>
-                {res && (
+
+                {sample && (
                     <div
                         style={{
                             marginTop: '1rem',
                             marginBottom: '1rem',
-                            display: displaySchema ? 'none' : 'block',
+                            display: displaySchemaTab ? 'none' : 'block',
                         }}>
-                        <PrettyPrint jsonObj={res}></PrettyPrint>
+                        <PrettyPrint jsonObj={sample}></PrettyPrint>
                     </div>
                 )}
             </div>
         </div>
     );
 };
-
-/**
- * Put properties in an array
- * @param {object} properties
- * @return {Array}
- */
-function propMapping(properties) {
-    const result = Object.keys(properties).map((key) => {
-        const obj = {
-            name: key,
-            type: properties[key].type,
-        };
-        if (Object.prototype.hasOwnProperty.call(properties[key], 'properties')) {
-            const tmp = propMapping(properties[key].properties);
-            return { ...obj, properties: tmp };
-        }
-        return obj;
-    });
-
-    return result;
-}
 
 /**
  * Count the total of all properties, including sub-properties

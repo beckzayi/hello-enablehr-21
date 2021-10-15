@@ -1,4 +1,4 @@
-import data from '../content/enablehr.json';
+import data from '../content/enablehr_v2.json';
 import OpenAPISnippet from 'openapi-snippet';
 
 /**

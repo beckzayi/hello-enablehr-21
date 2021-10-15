@@ -25,6 +25,7 @@ module.exports = {
             },
         },
         'gatsby-plugin-force-trailing-slashes',
+        'gatsby-plugin-styled-components',
     ],
     siteMetadata: {
         title: 'enableHR API',

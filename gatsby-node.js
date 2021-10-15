@@ -1,29 +1,51 @@
-const { listPages, listPageParameters } = require('./src/utils/listPages');
+const SwaggerParser = require('swagger-parser');
 
-exports.createPages = ({ actions: { createPage } }) => {
-    const pageData = require('./src/content/enablehr.json');
+const api_spec = './src/content/enablehr.json';
 
-    const { paths } = pageData;
+const http_verbs = ['get', 'post', 'put', 'patch', 'delete'];
 
-    const results = [];
+exports.createPages = async ({ actions: { createPage } }) => {
+    // Parse the openapi json file
+    const parser = new SwaggerParser(),
+        api = await parser.parse(require.resolve(api_spec));
 
-    // convert JSON string to array
-    Object.keys(paths).forEach((key) => {
-        // `key` here is the api request url
-        const apiUrl = key;
-        const arrayOfPages = listPages(paths[apiUrl], apiUrl);
-        const arrayOfPageParams = listPageParameters(paths[apiUrl]);
-        arrayOfPages.forEach((item) => {
-            item.path_parameters = arrayOfPageParams;
-            results.push(item);
-        });
-    });
+    // the `paths` object in the api spec
+    const { paths } = api;
 
-    results.forEach((page) => {
-        createPage({
-            path: `/development/${page.slug}`,
-            component: require.resolve(`./src/templates/page-template.js`),
-            context: { page, identifier: page.operationId },
+    // Retrieve all paths in an array
+    const arrayPaths = Object.keys(paths);
+
+    // Retrieve the individual path object
+    arrayPaths.forEach((endpoint) => {
+        // endpoint i.e. `/accounts/{accountId}/employees`
+        // pathObj -> path: { get, post, parameters }
+        const pathObj = paths[endpoint];
+        const parameters = pathObj.parameters;
+
+        // Iterate the path object
+        Object.keys(pathObj).forEach((operation) => {
+            // operation i.e `get`, `post`, `put` etc
+            if (!http_verbs.includes(operation)) {
+                return;
+            }
+
+            // operationObj -> i.e. get: { description, operationId, parameters, responses, security, summary, tags }
+            const operationObj = pathObj[operation];
+
+            const slug = `${operationObj.operationId}/${operation}`;
+
+            createPage({
+                path: `/development/${slug}`,
+                component: require.resolve(`./src/templates/page-template.js`),
+                context: {
+                    page: operationObj,
+                    parameters: parameters,
+                    method: operation,
+                    endpoint: endpoint,
+                    identifier: operationObj.operationId,
+                    slug: slug,
+                },
+            });
         });
     });
 };
