@@ -1,4 +1,4 @@
-import data from '../content/enablehr_v2.json';
+import data from '../content/enablehr.json';
 
 export const objectToArray = (obj) => {
     const keys = Object.keys(obj);
