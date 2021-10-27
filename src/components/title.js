@@ -1,3 +1,4 @@
 import React from 'react';
+import Wrapper from '../enb-styled/Wrapper';
 
-export default ({ content }) => <h1 className="page-title">{content}</h1>;
+export default ({ content }) => <Wrapper as={'h1'}>{content}</Wrapper>;

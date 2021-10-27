@@ -4,11 +4,13 @@ import Header from './header';
 import Sidebar from './sidebar/sidebar';
 import Footer from './footer';
 import '../styles/app.scss';
+import GlobalStyle from '../globalStyles';
 
 const Layout = (props) => {
     let displaySidebar = isDisplaySidebar(props);
     return (
         <div>
+            <GlobalStyle />
             <SEO {...props} />
             <Header />
 
