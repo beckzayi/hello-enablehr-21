@@ -50,6 +50,9 @@ async function loadSchema(obj, api) {
         const component = await getRefComponent(obj.$ref, api);
         return await loadSchema(component, api);
     }
+    if (obj.properties && obj.type) {
+        return obj;
+    }
 
     return obj?.content['application/json']?.schema;
 }

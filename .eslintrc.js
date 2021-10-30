@@ -3,6 +3,7 @@ module.exports = {
         browser: true,
         es6: true,
         node: true,
+        'jest/globals': true,
     },
     extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:react/recommended'],
     globals: {
@@ -21,7 +22,7 @@ module.exports = {
             presets: ['@babel/preset-react'],
         },
     },
-    plugins: ['prettier'],
+    plugins: ['prettier', 'jest'],
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
         strict: 0,

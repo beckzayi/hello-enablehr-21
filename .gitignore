@@ -62,3 +62,6 @@ package-lock.json
 # Build path
 public/
 .netlify
+
+# Jest coverage
+coverage/
