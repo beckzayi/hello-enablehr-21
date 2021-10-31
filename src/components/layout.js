@@ -4,7 +4,7 @@ import Header from './header';
 import Sidebar from './sidebar/sidebar';
 import Footer from './footer';
 import '../styles/app.scss';
-import GlobalStyle from '../globalStyles';
+import GlobalStyle from '../theme/globalStyles';
 
 const Layout = (props) => {
     let displaySidebar = isDisplaySidebar(props);

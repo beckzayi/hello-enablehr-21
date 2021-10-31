@@ -1,11 +1,25 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledFooter = styled.footer`
+    padding: 40px 0 20px 0;
+    font-size: ${(props) => props.theme.fontSizes.small};
+    color: ${(props) => props.theme.colors.grey['500']};
+`;
+
+const StyledFooterSocial = styled.div`
+    text-align: right;
+    a:not(:last-child) {
+        margin-right: 12px;
+    }
+`;
 
 const Footer = () => (
-    <footer>
+    <StyledFooter>
         <div className="row">
             <div className="col">&copy; {new Date().getFullYear()} enableHR &middot; All rights reserved</div>
             <div className="col">
-                <div className="footer-social">
+                <StyledFooterSocial>
                     <a href="https://www.facebook.com/enableHRAU/" target="_blank" rel="noopener noreferrer">
                         <img src="/images/facebook.svg" alt="Facebook" />
                     </a>
@@ -15,10 +29,10 @@ const Footer = () => (
                     <a href="https://twitter.com/enableHR" target="_blank" rel="noopener noreferrer">
                         <img src="/images/twitter.svg" alt="Twitter" />
                     </a>
-                </div>
+                </StyledFooterSocial>
             </div>
         </div>
-    </footer>
+    </StyledFooter>
 );
 
 export default Footer;

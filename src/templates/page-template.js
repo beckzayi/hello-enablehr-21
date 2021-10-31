@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import { withTheme } from 'styled-components';
 import Title from '../components/title';
 import CustomContent from '../components/customContent';
 import Endpoint from '../components/endpoint';
@@ -56,7 +57,7 @@ const PageTemplate = ({ pageContext: { page, parameters, method, endpoint, slug 
     );
 };
 
-export default PageTemplate;
+export default withTheme(PageTemplate);
 
 /**
  * The purpose of this query is to retrieve the custom content for each single API page, and will be inserted to this page template.
